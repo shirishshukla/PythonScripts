@@ -15,19 +15,17 @@
 * Directory structure 
 ```
 /tmp/Test/
-├── A
-│   └── z
-│       ├── a1
-│       │   └── b3
-│       │       └── test.txt
+├── AbZ
+│   └── abz
 │       └── A1
-│           └── b3
-│               └── TeSt.txt
-└── R
-    └── P
-        └── D1
-            └── B3
-                └── ZteSt1.Txt
+│           └── B2
+└── Bfd
+    ├── ASz
+    │   └── a1
+    │       ├── C1
+    │       └── c1.txt
+    └── AsZ.txt
+
 ```
 
 ## Run Script 
@@ -37,11 +35,30 @@ Path Dir "/tmp/Test_False_ptha" not exist, please validate !
 
 ### python3 _rename.py -p /tmp/Test
 ```
- Input Path: /tmp/Test
- Rename /tmp/Test/zAbcD/abcd -> /tmp/Test/zAbcD/abcd :  No Change
- Rename /tmp/Test/zAbcD/{g-m} -> /tmp/Test/zAbcD/{g-m} :  No Change
- Rename /tmp/Test/Aabc/zxv_{1a -> /tmp/Test/Aabc/zxv_{1a :  No Change
- Rename /tmp/Test/Aabc/{a-f} -> /tmp/Test/Aabc/{a-f} :  No Change
- Rename /tmp/Test/zAbcD -> /tmp/Test/zabcd :  Success
- Rename /tmp/Test/Aabc -> /tmp/Test/aabc :  Success
+Input Path: /tmp/Test/
+Rename /tmp/Test/Bfd/ASz/a1/C1 -> /tmp/Test/Bfd/ASz/a1/c1 :  Success Changed
+Rename /tmp/Test/Bfd/ASz/a1/c1.txt -> /tmp/Test/Bfd/ASz/a1/c1.txt :  No Change
+Rename /tmp/Test/Bfd/ASz/a1 -> /tmp/Test/Bfd/ASz/a1 :  No Change
+Rename /tmp/Test/Bfd/ASz -> /tmp/Test/Bfd/asz :  Success Changed
+Rename /tmp/Test/Bfd/AsZ.txt -> /tmp/Test/Bfd/asz.txt :  Success Changed
+Rename /tmp/Test/AbZ/abz/A1/B2 -> /tmp/Test/AbZ/abz/A1/b2 :  Success Changed
+Rename /tmp/Test/AbZ/abz/A1 -> /tmp/Test/AbZ/abz/a1 :  Success Changed
+Rename /tmp/Test/AbZ/abz -> /tmp/Test/AbZ/abz :  No Change
+Rename /tmp/Test/Bfd -> /tmp/Test/bfd :  Success Changed
+Rename /tmp/Test/AbZ -> /tmp/Test/abz :  Success Changed
+
+```
+### After run
+```
+/tmp/Test/
+├── abz
+│   └── abz
+│       └── a1
+│           └── b2
+└── bfd
+    ├── asz
+    │   └── a1
+    │       ├── c1
+    │       └── c1.txt
+    └── asz.txt
 ```
