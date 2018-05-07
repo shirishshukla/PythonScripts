@@ -37,8 +37,13 @@ def rename_df(r,items):
             if on == nm:
                print(" No Change")
             else:
-                os.rename(on,nm)
-                if os.path.exists(nm):   print(" Success")
+                if os.path.exists(nm):
+                   if os.path.isdir(nm): ftype="File"
+                   else: ftype="Dir"
+                   print(" Already {} exist with same name, skipping ..".format(ftype))
+                else:
+                    os.rename(on,nm)
+                    if os.path.exists(nm):   print(" Success Changed")
     except Exception as e:
         print("Error: ", str(e))
 
