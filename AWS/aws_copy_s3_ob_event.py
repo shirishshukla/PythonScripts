@@ -29,9 +29,9 @@ def lambda_handler(event, context):
         print("Error: " + str(err))
 
     srcKeyFileName = srcKeyFile.split('/')[-1]
-    if srcBucket == srcBucketName and srcKeyFileName.startswith(srcDirPath):
+    if srcBucket == srcBucketName and srcKeyFile.startswith(srcDirPath):
         try:
-            dstFileKey=destDirPath+obj.split(srcDirPath)[1]
+            dstFileKey=destDirPath+srcKeyFile.split(srcDirPath)[1]
             copy_s3_obj(srcBucket, destBucket, srcFileKey, dstFileKey) # within same bucket
         except Exception as err:
             print("Failed Error: "+ str(err))
