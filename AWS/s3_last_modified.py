@@ -21,13 +21,23 @@ s3r = boto3.resource('s3')
 for bucket in s3c.list_buckets()['Buckets']:
     bucketName=bucket['Name']
     get_last_mod_keys = lambda obj: int(obj['LastModified'].strftime('%s'))
-    s3keys = s3c.list_objects_v2(Bucket=bucketName)['Contents']
-    latestModified = [ {'obj_key': obj['Key'], 'mod_time': obj['LastModified']} for obj in sorted(s3keys, key=get_last_mod_keys)][-1]
-    daysSinceLastModified = (nowUTC.replace(tzinfo=timezone.utc) - latestModified['mod_time']).days
-    if not thresholdDays or thresholdDays == 0:
-        print('=> Bucket: {} | Last Modified Key: {} on {} | Days Before: {}'.format(bucketName, latestModified['obj_key'], str(latestModified['mod_time']), str(daysSinceLastModified)))
-    elif thresholdDays and daysSinceLastModified > thresholdDays:
-        print('=> Bucket: {} | Last Modified Key: {} on {} | Days Before: {}'.format(bucketName, latestModified['obj_key'], str(latestModified['mod_time']), str(daysSinceLastModified)))
+    try:
+        s3keys = s3c.list_objects_v2(Bucket=bucketName)['Contents']
+        latestModified = [ {'obj_key': obj['Key'], 'mod_time': obj['LastModified']} for obj in sorted(s3keys, key=get_last_mod_keys)][-1]
+        daysSinceLastModified = (nowUTC.replace(tzinfo=timezone.utc) - latestModified['mod_time']).days
+        if not thresholdDays or thresholdDays == 0:
+            print('=> Bucket: {} | Last Modified Key: {} on {} | Days Before: {}'.format(bucketName, latestModified['obj_key'], str(latestModified['mod_time']), str(daysSinceLastModified)))
+        elif thresholdDays and daysSinceLastModified > thresholdDays:
+            print('=> Bucket: {} | Last Modified Key: {} on {} | Days Before: {}'.format(bucketName, latestModified['obj_key'], str(latestModified['mod_time']), str(daysSinceLastModified)))
+    except KeyError as err:
+        if err == 'Contents':
+            print('=> Bucket: {} | Is Blank'.format(bucketName))
+            pass
+        else:
+            print('KeyError: ', err)
+    except:
+        print('Failed with error')
+        raise
 
 
 #Output Sample:
