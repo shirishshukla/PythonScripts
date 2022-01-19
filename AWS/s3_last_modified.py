@@ -30,7 +30,7 @@ for bucket in s3c.list_buckets()['Buckets']:
         elif thresholdDays and daysSinceLastModified > thresholdDays:
             print('=> Bucket: {} | Last Modified Key: {} on {} | Days Before: {}'.format(bucketName, latestModified['obj_key'], str(latestModified['mod_time']), str(daysSinceLastModified)))
     except KeyError as err:
-        if err == 'Contents':
+        if 'Contents' in err.args:
             print('=> Bucket: {} | Is Blank'.format(bucketName))
             pass
         else:
