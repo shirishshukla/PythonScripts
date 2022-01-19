@@ -34,11 +34,9 @@ for bucket in s3c.list_buckets()['Buckets']:
             print('=> Bucket: {} | Is Blank'.format(bucketName))
             pass
         else:
-            print('KeyError: ', err)
-    except:
-        print('Failed with error')
-        raise
-
+            print('FAILED: for Bucket: {} | Error -> KeyError: {}'.format(bucketName, err))
+    except Exception as err:
+        print('FAILED: for Bucket: {} | Error: {}'.format(bucketName, str(err)))
 
 #Output Sample:
 # % Python3 "/Users/shirish/Desktop/_workMAC/Python/s3_last_modified.py" 0
