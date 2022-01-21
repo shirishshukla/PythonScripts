@@ -59,7 +59,7 @@ def copy_s3_obj(srcBucket, destBucket, srcObjKey, destObjKey):
 
 
 ## call.. for testing
-#event={ "srcBucket": "test-buket", "srcDirPath": "test/a", "destBucket": "nwfls", "destDirPath": "test/b"}
+#event={ "srcBucket": "test-buket", "srcDirPath": "test/a", "destBucket": "test-buket-dest", "destDirPath": "test/b"}
 #if __name__ == '__main__':
 #    lambda_handler(event, 'context')
 
