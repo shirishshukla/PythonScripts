@@ -39,15 +39,14 @@ def lambda_handler(event, context):
     except Exception as err:
         print("Error: " + str(err))
 
-
 # Get Latest modifed obj in S3 bucket
 def get_latest_modified_obj(srcBucket, srcDirPath):
     try:
         get_last_mod_keys = lambda obj: int(obj['LastModified'].strftime('%s'))
-        s3keys = S3C.list_objects_v2(Bucket=srcBucket,Prefix=srcDirPath) # GET LIST OF ALL OBECTS IN SRC BUCKET
+        s3keys = S3C.list_objects_v2(Bucket=srcBucket,Prefix=srcDirPath) # GET LIST OF ALL OBECTS IN SRC BUCKET with match prefix
         if 'Contents' in s3keys:
             s3keys = s3keys['Contents']
-            latestModFile = [ {'obj_key': obj['Key'], 'mod_time': obj['LastModified']} for obj in sorted(s3keys, key=get_last_mod_keys)][-1] ## GET LAST MODIFIED FILE.
+            latestModFile = [ {'obj_key': obj['Key'], 'mod_time': obj['LastModified']} for obj in sorted(s3keys, key=get_last_mod_keys)][-1] # GET LAST MODIFIED FILE.
             print("Bucket: {}, Latest modified Object {}, At Time: {}".format(srcBucket, latestModFile['obj_key'], latestModFile['mod_time']))
             return latestModFile['obj_key']
         else:
@@ -57,7 +56,7 @@ def get_latest_modified_obj(srcBucket, srcDirPath):
         pass
     return False
 
-# Copy obj from src biucket to dest and del from src
+# Copy obj from src bucket to dest and del from src
 def copy_s3_obj(srcBucket, destBucket, srcObjKey, destObjKey):
     try:
         print('\n==> Copy: S3 Object \"s3://{0}/{2}\" to \"s3://{1}/{3}\" and delete from source.'.format(srcBucket, destBucket, srcObjKey, destObjKey))
