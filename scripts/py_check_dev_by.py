@@ -4,7 +4,7 @@ import argparse
 def check_devide(s, e, d):
     ret=[]
     for n in range(s, e+1):
-        print(n%d)
+        #print(n%d)
         if n % d == 0:
             ret.append(n)
     return ret
