@@ -4,7 +4,6 @@ import argparse
 def check_devide(s, e, d):
     ret=[]
     for n in range(s, e+1):
-        #print(n%d)
         if n % d == 0:
             ret.append(n)
     return ret
@@ -23,3 +22,6 @@ if __name__ == '__main__':
     if result:
         print('List of all the number from the start {} to the end {} inclusively that are divisible by the {}.'.format(s, e, d))
         print(result)
+
+
+## END
