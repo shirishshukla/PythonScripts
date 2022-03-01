@@ -21,6 +21,5 @@ if __name__ == '__main__':
     d=args.divisible_by
     result = check_devide(int(s), int(e), int(d))
     if result:
-        print('List of all the number from the start {} to the end {} \
-            inclusively that are divisible by the {}.'.format(s, e, d))
+        print('List of all the number from the start {} to the end {} inclusively that are divisible by the {}.'.format(s, e, d))
         print(result)
