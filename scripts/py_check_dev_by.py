@@ -1,3 +1,8 @@
+##
+# Description: Input 3 numbers, A starting number and an ending number and a number to check if divisible by.
+# return a list of all the number from the start to the end inclusively that are divisible by the third number.
+##
+
 import os
 import argparse
 
@@ -22,6 +27,5 @@ if __name__ == '__main__':
     if result:
         print('List of all the number from the start {} to the end {} inclusively that are divisible by the {}.'.format(s, e, d))
         print(result)
-
 
 ## END
