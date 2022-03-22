@@ -17,7 +17,7 @@ TODAY=`date +%Y%m%d.%H%M`
 echo -e "----------------------------------\n  $TODAY  \n----------------------------------"
 instance_name=$(aws ec2 describe-instances --instance-ids $instanceID --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value[]]' --output text)
 if [[ $instance_name == "" ]]; then
-    echo -e "Instance-ID ($instance_id) doesn't exist. Please check." | /bin/mail -A ses -s "$instance_id scheduled for AMI doesn't exist" -r $From $To
+    echo -e "Instance-ID ($instance_id) doesn't exist. Please check." 
     exit
 else
     #Create the AMI name.
