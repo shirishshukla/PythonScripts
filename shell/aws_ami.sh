@@ -14,16 +14,13 @@
 instance_id=$1
 [[ -z $instance_id ]] && echo "Please pass instance-id as arg" && exit 1
 
-TODAY=`date +%Y%m%d.%H%M`
+TODAY=$(date +%Y%m%d.%H%M)
 
 echo -e "-------------- Creating AMI of ec2 instance $instance_id --------------"
-if `aws ec2 describe-instances --instance-ids $instanceID >/dev/null 2>&1`; then
-    instance_name=$(aws ec2 describe-instances --instance-ids $instanceID --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value[]]' --output text)
-    [[ -z $instance_name ]] && instance_name=$instanceID
-else
-    echo -e "Instance ID: ($instance_id) doesn't exist. Please check."
-    exit 1
-else
+if `aws ec2 describe-instances --instance-ids $instance_id >/dev/null 2>&1`; then
+    instance_name=$(aws ec2 describe-instances --instance-ids $instance_id --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value[]]' --output text)
+    [[ -z $instance_name ]] && instance_name="${instance_id}"
+
     # ami name
     ami_name="${instance_name}-${TODAY}"
 
@@ -37,4 +34,7 @@ else
     else
         echo -e "\n==> FAILED: AMI creation failed for instance $instance_name ($instance_id). Please check.\n"
     fi
+else
+    echo -e "Instance ID: ($instance_id) doesn't exist. Please check."
+    exit 1
 fi
