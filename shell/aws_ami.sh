@@ -6,9 +6,9 @@
 #   - AMI_Creation_Date:
 #
 #### !! How TO !!
-# sh script.sh instance-id
+# Syntax: sh script.sh instance-id
 # eg.
-# sh script.sh i-234567689
+#    sh script.sh i-234567689
 ##
 
 instanceID=$1
