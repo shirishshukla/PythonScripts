@@ -27,10 +27,10 @@ else
     ami_id=$(aws ec2 create-image --instance-id "$instanceID" --name "$ami_name" --description "Auto AMI from $instance_name ($instanceID)" --no-reboot --output text)
 
     #Tag the AMI
-    if [[ $ami_id != "" ]]; then
-        echo -e "$ami_id ($ami_name) created successfully from $instance_name ($instanceID).\n"
+    if [[ ! -z $ami_id ]]; then
+        echo -e "\n==> AMI: $ami_id ($ami_name) created successfully from $instance_name ($instanceID).\n"
         aws ec2 create-tags --resources $ami_id --tags Key=Instance_id,Value=$instanceID Key=AMI_Creation_Date,Value=$TODAY
     else
-        echo -e "AMI creation failed from $instance_name ($instanceID). Please check.\n"
+        echo -e "\n==>FAILED: AMI creation failed from $instance_name ($instanceID). Please check.\n"
     fi
 fi
