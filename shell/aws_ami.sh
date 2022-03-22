@@ -1,11 +1,11 @@
 ##
-# description: Create ami of instance
-# this will create ami with
-# name: instance_name-YYYMMDD.HHMM
-# Instance_id:
-# AMI_Creation_Date:
+# Description: Create ami of AWS ec2 instance
+#  This will create AMI with tags
+#   - name: instance_name-YYYMMDD.HHMM
+#   - Instance_id:
+#   - AMI_Creation_Date:
 #
-#### !! How TO!!
+#### !! How TO !!
 # sh script.sh instance-id
 # eg.
 # sh script.sh i-234567689
