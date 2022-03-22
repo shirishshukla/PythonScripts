@@ -20,13 +20,13 @@ if [[ $instance_name == "" ]]; then
     echo -e "Instance-ID ($instanceID) doesn't exist. Please check."
     exit
 else
-    #Create the AMI name.
+    #ami name
     ami_name="${instance_name}-${TODAY}"
 
-    #To create AMI from the instance
+    #create AMI from the instance
     ami_id=$(aws ec2 create-image --instance-id "$instanceID" --name "$ami_name" --description "Auto AMI from $instance_name ($instanceID)" --no-reboot --output text)
 
-    #Tag the AMI
+    #Tag the AMI with instance id and creation date 
     if [[ ! -z $ami_id ]]; then
         echo -e "\n==> AMI: $ami_id ($ami_name) created successfully from $instance_name ($instanceID).\n"
         aws ec2 create-tags --resources $ami_id --tags Key=Instance_id,Value=$instanceID Key=AMI_Creation_Date,Value=$TODAY
