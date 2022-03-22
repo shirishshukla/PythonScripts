@@ -31,6 +31,6 @@ else
         echo -e "\n==> AMI: $ami_id ($ami_name) created successfully from $instance_name ($instanceID).\n"
         aws ec2 create-tags --resources $ami_id --tags Key=Instance_id,Value=$instanceID Key=AMI_Creation_Date,Value=$TODAY
     else
-        echo -e "\n==>FAILED: AMI creation failed from $instance_name ($instanceID). Please check.\n"
+        echo -e "\n==> FAILED: AMI creation failed from $instance_name ($instanceID). Please check.\n"
     fi
 fi
