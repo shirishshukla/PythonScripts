@@ -29,7 +29,7 @@ def lambda_handler(event, context):
                         aws_access_key_id=assume_role['AccessKeyId']
                         aws_secret_access_key=assume_role['SecretAccessKey']
                         aws_session_token=assume_role['SessionToken']
-                )
+                    )
                 POLICIES_DATA = IAMC.list_policies(
                         Scope=FilterScope,
                         OnlyAttached=False
