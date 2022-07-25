@@ -3,7 +3,7 @@
 # Prerequisite:
 #   - Must run from AWS Lambda
 #   - lambda iam role to have permission to list and delete iam policy
-#   input: event = { 'account': ['ac1', 'ac2'], 'action': 'delete'}
+#   input: event = { 'accounts': ['ac1', 'ac2'], 'action': 'delete'}
 ##
 
 import boto3
