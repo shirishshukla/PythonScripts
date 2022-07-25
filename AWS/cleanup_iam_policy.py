@@ -23,7 +23,8 @@ def lambda_handler(event, context):
         DelteUnattachedPolices = True if 'action' in event and event['action'] == 'delete' else DelteUnattachedPolices
         if AccountIds:
             for act in AccountIds:
-                assume_role = STSC.assume_role(RoleArn=f"arn:aws:iam::{act}:role/{AssumeRoleName}", RoleSessionName='assumme')['Credentials']
+                roleARN = f"arn:aws:iam::{act}:role/{AssumeRoleName}"
+                assume_role = STSC.assume_role(RoleArn=roleARN, RoleSessionName='assumme')['Credentials']
                 IAMC = boto3.client('iam',
                         aws_access_key_id=assume_role['AccessKeyId']
                         aws_secret_access_key=assume_role['SecretAccessKey']
