@@ -37,7 +37,7 @@ def lambda_handler(event, context):
 
                 FILTERED_POLICIES = [ p['Arn'] for p in POLICIES_DATA['Policies'] if p['AttachmentCount'] == 0 ]
                 while 'Marker' in POLICIES_DATA:
-                    POLICIES_DATA = IAMClist_policies(
+                    POLICIES_DATA = IAMC.list_policies(
                             Scope=FilterScope,
                             OnlyAttached=False,
                             Marker=POLICIES_DATA['Marker']
