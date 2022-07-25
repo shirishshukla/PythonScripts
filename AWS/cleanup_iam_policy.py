@@ -15,7 +15,6 @@ AssumeRoleName='assumeMe' ## change this ????
 # session
 STSC = boto3.client('sts')
 
-
 # Lambda Function
 def lambda_handler(event, context):
     try:
